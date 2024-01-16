@@ -11,11 +11,19 @@ with app.app_context():
     db.create_all()
 
 @app.route("/")
-def hello_world():
+def home():
     sql_query = text("SELECT * FROM cafe")
     result = db.session.execute(sql_query)
     all_cafes = result.fetchall()
     return render_template('index.html', cafes=all_cafes)
+
+@app.route("/add")
+def add_cafe():
+    pass
+
+@app.route("/delete")
+def delete_cafe():
+    pass
 
 if __name__=="__main__":
     app.run(debug=True)
