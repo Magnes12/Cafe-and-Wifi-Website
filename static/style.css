@@ -12,6 +12,7 @@ header {
     padding: 1rem;
 }
 
+
 .cafe-list {
     display: flex;
     flex-wrap: wrap;
@@ -38,3 +39,14 @@ header {
     width: 400px;
 }
 
+.cafes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+form {
+    margin-top: -500px;
+}

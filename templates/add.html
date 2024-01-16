@@ -1,0 +1,10 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% extends "base.html" %} 
+{% block content %}
+<div class="cafes-container">
+    <form class="" method="POST" action="{{ url_for('add_cafe') }}">
+        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+    </form>
+</div>
+
+{% endblock %}

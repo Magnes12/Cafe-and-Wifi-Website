@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafes for Remote Work</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-</head>
-<body>
-
-    <header>
-        <h1>Cafes for Remote Work</h1>
-    </header>
+{% extends "base.html" %} {% block content %}
 
     <section class="cafe-list">
         {% for cafe in cafes %}
@@ -33,10 +21,10 @@
                         {% endif %}
                         <li>Avg. seats: {{ cafe.seats }}</li>
                         <li>☕Avg. price: {{ cafe.coffe_price }}☕</li>
+                        <a href="{{ url_for('delete_cafe')}}"><button>Delete</button></a>
                     </ul>
             </div>
         {% endfor %}
     </section>
 
-</body>
-</html>
+{% endblock %}
