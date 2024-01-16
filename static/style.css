@@ -19,16 +19,20 @@ header {
     padding: 1rem;
     color: #333;
 }
+
 .cafe-card h1{
     color: #333;
 }
+
 .cafe-card ul{
     list-style-type: none;
 }
+
 .cafe-card li{
     color: #333;
     text-align: center;
 }
+
 .cafe-card img {
     height: 400px;
     width: 400px;
