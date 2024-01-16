@@ -8,6 +8,7 @@ from flask_bootstrap import Bootstrap5
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cafes.db"
+app.config['SQLALCHEMY_POOL_SIZE'] = 20  
 db = SQLAlchemy()
 db.init_app(app)
 bootstrap = Bootstrap5(app)
@@ -15,7 +16,13 @@ app.config['SECRET_KEY'] = 'abc'
 
 
 with app.app_context():
-    db.create_all()
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error: {e}")
+    finally:
+        db.session.close()
 
 class AddCafe(FlaskForm):
     name = StringField("Cafe name", validators=[DataRequired()])
@@ -66,9 +73,17 @@ def add_cafe():
     return render_template('add.html', form=form)
     
 
-@app.route("/delete")
-def delete_cafe():
-    pass
+@app.route("/delete/<int:caffee_id>", methods=["GET", "POST"])
+def delete_cafe(caffee_id):
+    delete_sql_query = text("DELETE FROM cafe WHERE id = :id")
+    result = db.session.execute(delete_sql_query,{"id":caffee_id})
+
+    if result.rowcount > 0:
+        db.session.commit()
+        return redirect(url_for('home'))
+    else:
+        return render_template('error.html', message='Cafe not found or deletion unsuccessful')
+    
 
 if __name__=="__main__":
     app.run(debug=True)
