@@ -76,14 +76,10 @@ def add_cafe():
 @app.route("/delete/<int:caffee_id>", methods=["GET", "POST"])
 def delete_cafe(caffee_id):
     delete_sql_query = text("DELETE FROM cafe WHERE id = :id")
-    result = db.session.execute(delete_sql_query,{"id":caffee_id})
+    db.session.execute(delete_sql_query,{"id":caffee_id})
+    db.session.commit()
+    return redirect(url_for('home'))
 
-    if result.rowcount > 0:
-        db.session.commit()
-        return redirect(url_for('home'))
-    else:
-        return render_template('error.html', message='Cafe not found or deletion unsuccessful')
-    
 
 if __name__=="__main__":
     app.run(debug=True)
