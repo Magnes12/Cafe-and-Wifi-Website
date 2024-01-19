@@ -4,15 +4,16 @@ from sqlalchemy import text
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
-from flask_bootstrap import Bootstrap5
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cafes.db"
 app.config['SQLALCHEMY_POOL_SIZE'] = 20
+app.config['SECRET_KEY'] = 'abc'
 db = SQLAlchemy()
 db.init_app(app)
-bootstrap = Bootstrap5(app)
-app.config['SECRET_KEY'] = 'abc'
+
+
 
 
 with app.app_context():
