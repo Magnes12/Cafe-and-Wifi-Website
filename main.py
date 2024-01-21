@@ -14,8 +14,6 @@ db = SQLAlchemy()
 db.init_app(app)
 
 
-
-
 with app.app_context():
     try:
         db.session.commit()
@@ -37,7 +35,7 @@ class AddCafe(FlaskForm):
                            validators=[DataRequired()])
     has_sockets = StringField("If has sockets? 0 for no, 1 for yes",
                               validators=[DataRequired()])
-    has_tiolet = StringField("If has toilet? 0 for no, 1 for yes",
+    has_toilet = StringField("If has toilet? 0 for no, 1 for yes",
                              validators=[DataRequired()])
     has_wifi = StringField("If has free wifi? 0 for no, 1 for yes",
                            validators=[DataRequired()])
@@ -78,7 +76,7 @@ def add_cafe():
                 "img_url": form.img_url.data,
                 "location": form.location.data,
                 "has_sockets": form.has_sockets.data,
-                "has_toilet": form.has_tiolet.data,
+                "has_toilet": form.has_toilet.data,
                 "has_wifi": form.has_wifi.data,
                 "can_take_calls": form.can_take_call.data,
                 "seats": form.seats.data,
